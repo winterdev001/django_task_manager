@@ -1,14 +1,17 @@
 from django import forms
+from .models import TaskItem
 
-class TaskForm(forms.Form):
-    pulldown_data = [
-        ('1','todo'),
-        ('2','doing'),
-        ('1','done')
-    ]
-    
-    title = forms.CharField(label='Title')
-    desciption = forms.CharField(label='Description', widget=forms.Textarea())
-    status = forms.ChoiceField(label='Status', choices=pulldown_data)
-    deadline = forms.DateField(label='Deadline')
-    
+class TaskForm(forms.ModelForm):
+    class Meta:
+        model = TaskItem
+        fields = '__all__'        
+        pulldown_data = [
+            ("todo","todo"),
+            ("doing","doing"),
+            ("done","done"),
+        ]
+        widgets = {
+            'description': forms.Textarea(),
+            'status': forms.Select(choices=pulldown_data),
+            'deadline': forms.DateInput(attrs={'type': 'date'})
+        }

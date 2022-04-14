@@ -1,0 +1,32 @@
+{% extends "base.html" %}
+{% block content %}
+<!--delete.html-->
+  <p>
+    <strong>Title:</strong>
+    {{task.title}}
+  </p>
+
+  <p>
+    <strong>Description:</strong>
+    {{task.description}}
+  </p>
+
+  <p>
+    <strong>Status:</strong>
+    {{task.status}}
+  </p>
+
+  <p>
+    <strong>Deadline:</strong>
+    {{task.deadline | date:"l, F j" }}
+  </p>
+
+  <form action="{% url 'delete' task.id %}" method="post">
+    {% csrf_token %}
+    <input type="submit" value="Delete">
+  </form>
+
+  <br>
+
+  <a href="{% url 'index' %}">Back</a>
+{% endblock %}

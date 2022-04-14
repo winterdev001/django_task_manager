@@ -1,0 +1,33 @@
+{% extends "base.html" %}
+{% block content %}
+<!--detail.html-->
+  {% if messages %}  <!-- 1 -->
+  <ul>
+      {% for message in messages %}  <!-- 2 -->
+      <li{% if message.tags %} class="{{ message.tags }}" {% endif %}>{{ message }}</li>  <!-- 3 -->
+      {% endfor %}
+  </ul>
+  {% endif %}
+  <p>
+    <strong>Title:</strong>
+    {{task.title}}
+  </p>
+
+  <p>
+    <strong>Description:</strong>
+    {{task.description}}
+  </p>
+
+  <p>
+    <strong>Status:</strong>
+    {{task.status}}
+  </p>
+
+  <p>
+    <strong>Deadline:</strong>
+    {{task.deadline | date:"l, F j" }}
+  </p>
+  <a href="{% url 'index' %}">Back</a> |
+  <a href="{% url 'edit' task.id %}">Edit</a>
+
+{% endblock %}
