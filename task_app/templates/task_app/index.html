@@ -1,14 +1,6 @@
 {% extends "base.html" %}
 {% block content %}
 <!--index.html-->
-
-{% if messages %}
-<ul>
-    {% for message in messages %}
-    <li{% if message.tags %} class="{{ message.tags }}" {% endif %}>{{ message }}</li>
-    {% endfor %}
-</ul>
-{% endif %}
 {% if task_lists %}
 <h3>All Tasks</h3>
 <table>
@@ -29,7 +21,6 @@
     </tr>
     {% empty %}
     <h4>You have no Tasks!</h4>
-    <a href="{% url 'create' %}">New Task</a>
     {% endfor %}
   </table>
 
